@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelMate — Smart Travel Companion</title>
+<style>
+:root{--ink:#102a43;--muted:#627d98;--bg:#f5f9fc;--card:#fff;--primary:#087ea4;--primary2:#00a6a6;--accent:#ffb703;--line:#d9e5ec;--shadow:0 12px 35px rgba(16,42,67,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:14px 6%}
+.logo{font-size:22px;font-weight:800;color:var(--primary)}.logo span{color:var(--primary2)}
+nav a{margin-left:22px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;background:var(--primary);color:#fff}
+.hero{padding:70px 6% 55px;background:linear-gradient(135deg,#e9f8fb,#f8fcff);display:grid;grid-template-columns:1.1fr .9fr;gap:45px;align-items:center}
+.badge{display:inline-block;background:#d8f3f6;color:#056b82;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:800}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:18px 0}.hero p{font-size:18px;color:var(--muted);max-width:620px;line-height:1.6}
+.hero-card{background:var(--card);padding:24px;border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--line)}
+input,select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}label{font-size:13px;font-weight:700;display:block;margin:12px 0 6px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+section{padding:55px 6%}.section-title{text-align:center;margin-bottom:28px}.section-title h2{font-size:32px;margin:0 0 8px}.section-title p{color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.feature,.destination,.result,.emergency{background:var(--card);padding:22px;border-radius:18px;border:1px solid var(--line);box-shadow:0 6px 20px rgba(16,42,67,.05)}
+.icon{font-size:30px}.feature h3{margin:10px 0 7px}.feature p{color:var(--muted);font-size:14px;line-height:1.5}
+.destinations{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.destination{padding:0;overflow:hidden}.destination .pic{height:170px;display:flex;align-items:end;padding:16px;color:white;font-size:22px;font-weight:800;background-size:cover;background-position:center}.d1{background:linear-gradient(135deg,#0077b6,#48cae4)}.d2{background:linear-gradient(135deg,#2a9d8f,#90be6d)}.d3{background:linear-gradient(135deg,#9b5de5,#f15bb5)}.destination .body{padding:17px}.destination p{color:var(--muted);font-size:14px}
+.planner{max-width:850px;margin:auto}.result{margin-top:20px;display:none}.result h3{margin-top:0}.day{padding:14px;border-left:4px solid var(--primary2);background:#f4fbfb;margin:10px 0;border-radius:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}.stat{background:#eef8fa;padding:17px;border-radius:14px}.stat b{font-size:23px;display:block}
+.emergency{background:#fff8e8;border-color:#ffe0a3;max-width:850px;margin:auto}.emergency h2{margin-top:0}.contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.contact{background:white;border-radius:10px;padding:14px;border:1px solid #f1dfb7}.contact b{display:block}
+footer{text-align:center;padding:28px;background:#102a43;color:#d9e5ec;font-size:13px}
+@media(max-width:800px){nav .links{display:none}.hero{grid-template-columns:1fr;padding-top:45px}.features{grid-template-columns:1fr 1fr}.destinations{grid-template-columns:1fr}.contacts,.stats{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">✈️ Travel<span>Mate</span></div>
+  <div class="links"><a href="#features">Features</a><a href="#explore">Explore</a><a href="#planner">Trip Planner</a><a href="#help">Emergency</a></div>
+  <button class="btn" onclick="document.querySelector('#planner').scrollIntoView()">Plan Trip</button>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="badge">SMART INDIA HACKATHON • TRAVEL & TOURISM</span>
+    <h1>Travel smarter.<br><span style="color:var(--primary)">Explore better.</span></h1>
+    <p>A smart travel companion that combines itinerary planning, budgeting, local discovery, safety and sustainable travel in one simple platform.</p>
+    <button class="btn" onclick="document.querySelector('#planner').scrollIntoView()">Start Planning →</button>
+  </div>
+  <div class="hero-card">
+    <h2 style="margin-top:0">🧭 Quick Trip Planner</h2>
+    <div class="formgrid">
+      <div class="full"><label>Destination</label><input id="destinationInput" placeholder="e.g. Visakhapatnam"></div>
+      <div><label>Days</label><select id="days"><option>1</option><option>2</option><option selected>3</option><option>5</option><option>7</option></select></div>
+      <div><label>Budget (₹)</label><input id="budget" type="number" value="5000" min="500"></div>
+      <div class="full"><label>Interests</label><select id="interest"><option>Beaches & Nature</option><option>History & Culture</option><option>Food & Shopping</option><option>Adventure</option></select></div>
+    </div>
+    <button class="btn" style="width:100%;margin-top:15px" onclick="makePlan()">✨ Generate My Trip</button>
+  </div>
+</header>
+
+<section id="features">
+ <div class="section-title"><h2>Everything in one place</h2><p>Designed around common problems faced by travellers.</p></div>
+ <div class="features">
+  <div class="feature"><div class="icon">🗺️</div><h3>Smart Itinerary</h3><p>Create a day-by-day plan based on time, interests and destination.</p></div>
+  <div class="feature"><div class="icon">💰</div><h3>Budget Planner</h3><p>Split your budget across travel, food, stay and activities.</p></div>
+  <div class="feature"><div class="icon">🚨</div><h3>Safety Hub</h3><p>Keep emergency contacts and essential safety information accessible.</p></div>
+  <div class="feature"><div class="icon">🌱</div><h3>Eco Travel</h3><p>Encourage public transport, local experiences and responsible tourism.</p></div>
+ </div>
+</section>
+
+<section id="explore">
+ <div class="section-title"><h2>Explore India</h2><p>Sample destination cards for your prototype.</p></div>
+ <div class="destinations">
+  <div class="destination"><div class="pic d1">🌊 Visakhapatnam</div><div class="body"><b>Beach • Nature • Heritage</b><p>Coastal experiences, viewpoints, museums and local food.</p></div></div>
+  <div class="destination"><div class="pic d2">🌿 Kerala</div><div class="body"><b>Backwaters • Nature • Culture</b><p>Build an itinerary around nature, culture and local experiences.</p></div></div>
+  <div class="destination"><div class="pic d3">🏛️ Jaipur</div><div class="body"><b>Heritage • Food • Shopping</b><p>Explore forts, markets, architecture and regional cuisine.</p></div></div>
+ </div>
+</section>
+
+<section id="planner">
+ <div class="section-title"><h2>AI-style Trip Planner</h2><p>This prototype generates a smart plan instantly. Connect an AI/API later for live recommendations.</p></div>
+ <div class="planner">
+  <div class="result" id="result"></div>
+ </div>
+</section>
+
+<section id="help">
+ <div class="section-title"><h2>🚨 Travel Safety Hub</h2><p>Keep essential help visible during a trip.</p></div>
+ <div class="emergency">
+  <h2>Emergency information</h2>
+  <div class="contacts">
+   <div class="contact"><b>🚓 Police</b>112</div>
+   <div class="contact"><b>🚑 Ambulance</b>108</div>
+   <div class="contact"><b>🔥 Fire</b>101</div>
+  </div>
+  <p style="color:var(--muted);font-size:13px">For the hackathon version, this section can later use location services to show nearby hospitals, police stations and tourist help centres.</p>
+ </div>
+</section>
+
+<footer>TravelMate • Smart Travel & Tourism Prototype • Smart India Hackathon 2026</footer>
+
+<script>
+function makePlan(){
+ const place=(document.getElementById('destinationInput').value||'Your Destination').trim();
+ const days=Number(document.getElementById('days').value);
+ const budget=Math.max(500,Number(document.getElementById('budget').value)||5000);
+ const interest=document.getElementById('interest').value;
+ const per=Math.round(budget/days);
+ const ideas={
+  'Beaches & Nature':['local viewpoint / sunrise spot','beach or nature trail','sunset + local food'],
+  'History & Culture':['heritage site or museum','local culture walk','historic landmark + evening market'],
+  'Food & Shopping':['local breakfast trail','popular market + regional lunch','shopping street + food tasting'],
+  'Adventure':['morning outdoor activity','scenic exploration','sunset adventure / leisure']
+ }[interest];
+ let daysHtml='';
+ for(let i=1;i<=days;i++){
+   const a=ideas[(i-1)%ideas.length];
+   daysHtml += `<div class="day"><b>Day ${i} — ${a}</b><br><span style="color:#627d98;font-size:14px">Suggested focus: ${interest}. Keep time for meals, rest and travel between places.</span></div>`;
+ }
+ const el=document.getElementById('result');
+ el.style.display='block';
+ el.innerHTML=`<h3>✨ Your ${days}-day ${place} plan</h3>
+ <p style="color:#627d98">Interest: <b>${interest}</b></p>${daysHtml}
+ <div class="stats"><div class="stat"><small>Total budget</small><b>₹${budget.toLocaleString('en-IN')}</b></div><div class="stat"><small>Daily target</small><b>₹${per.toLocaleString('en-IN')}</b></div><div class="stat"><small>Eco tip</small><b>🚌 Use local transit</b></div></div>`;
+ el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
